@@ -54,8 +54,8 @@
 /*                                                                        */
 /**************************************************************************/
 
-#ifndef TX_PORT_H
-#define TX_PORT_H
+#ifndef TX_PORT_CM4_H
+#define TX_PORT_CM4_H
 
 
 /* Determine if the optional ThreadX user define file should be used.  */

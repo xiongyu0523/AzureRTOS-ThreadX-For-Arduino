@@ -38,8 +38,7 @@
     .global  exception_table
 @
 @
-SYSTEM_CLOCK      =   48000000
-SYSTICK_CYCLES    =   ((SYSTEM_CLOCK / 100) -1)
+SYSTICK_CYCLES    =   ((F_CPU / 100) -1)
 
     .text
     .align 4
