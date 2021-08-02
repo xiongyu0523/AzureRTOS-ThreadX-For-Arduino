@@ -4,11 +4,6 @@
 
 #include <tx_api.h>
 
-// Select the serial port the project should use and communicate over
-// Sombe boards use SerialUSB, some use Serial
-#define SERIAL          SerialUSB
-//#define SERIAL          Serial
-
 #define DEMO_STACK_SIZE         1024
 #define DEMO_BYTE_POOL_SIZE     9120
 #define DEMO_BLOCK_POOL_SIZE    100
@@ -187,15 +182,15 @@ UINT    status;
 
         /* Print results */
         if (thread_0_counter % 10 == 0) {
-            SERIAL.printf("**** Azure RTOS ThreadX Demo for Arduino ****\r\n");
-            SERIAL.printf("     thread 0 events sent:          %lu\r\n", thread_0_counter);
-            SERIAL.printf("     thread 1 messages sent:        %lu\r\n", thread_1_counter);
-            SERIAL.printf("     thread 2 messages received:    %lu\r\n", thread_2_counter);
-            SERIAL.printf("     thread 3 obtained semaphore:   %lu\r\n", thread_3_counter);
-            SERIAL.printf("     thread 4 obtained semaphore:   %lu\r\n", thread_4_counter);
-            SERIAL.printf("     thread 5 events received:      %lu\r\n", thread_5_counter);
-            SERIAL.printf("     thread 6 mutex obtained:       %lu\r\n", thread_6_counter);
-            SERIAL.printf("     thread 7 mutex obtained:       %lu\r\n", thread_7_counter);
+            Serial.print("**** Azure RTOS ThreadX Demo for Arduino ****\r\n");
+            Serial.print("     thread 0 events sent:          "); Serial.println(thread_0_counter);
+            Serial.print("     thread 1 messages sent:        "); Serial.println(thread_1_counter);
+            Serial.print("     thread 2 messages received:    "); Serial.println(thread_2_counter);
+            Serial.print("     thread 3 obtained semaphore:   "); Serial.println(thread_3_counter);
+            Serial.print("     thread 4 obtained semaphore:   "); Serial.println(thread_4_counter);
+            Serial.print("     thread 5 events received:      "); Serial.println(thread_5_counter);
+            Serial.print("     thread 6 mutex obtained:       "); Serial.println(thread_6_counter);
+            Serial.print("     thread 7 mutex obtained:       "); Serial.println(thread_7_counter);
         }
 
         /* Sleep for 10 ticks.  */
@@ -381,6 +376,8 @@ UINT    status;
 
 void setup()
 {
+    Serial.begin(115200);
+    Serial.print("\r\nArduino Environment is Up\r\n");
 
     /* Enter the ThreadX kernel.  */
     tx_kernel_enter();

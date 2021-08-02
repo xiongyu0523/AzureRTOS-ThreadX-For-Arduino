@@ -37,10 +37,11 @@
     .global     __tx_IntHandler                     @ Int 0
 @
 @
-CPU_HZ            =   F_CPU
+CORE_HZ           =   F_CPU
 OSTICK_HZ         =   100
-SYSTICK_CYCLES    =   ((CPU_HZ / OSTICK_HZ) - 1)
+SYSTICK_CYCLES    =   ((CORE_HZ / OSTICK_HZ) - 1)
 
+    .cpu cortex-m4
     .text 32
     .align 4
     .syntax unified

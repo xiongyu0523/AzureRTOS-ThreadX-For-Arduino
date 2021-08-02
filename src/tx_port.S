@@ -1,4 +1,4 @@
-#if defined(__SAMD21__)
+#if defined(__SAMD21G18A__)
 #include "../ports/bsp/samd21/tx_initialize_low_level.S"
 #include "../ports/arch/cortex_m0/tx_thread_context_restore.S"
 #include "../ports/arch/cortex_m0/tx_thread_context_save.S"
@@ -9,7 +9,7 @@
 #include "../ports/arch/cortex_m0/tx_thread_stack_build.S"
 #include "../ports/arch/cortex_m0/tx_thread_system_return.S"
 #include "../ports/arch/cortex_m0/tx_timer_interrupt.S"
-#elif defined(__SAMD51__)
+#elif defined(__SAMD51P19A__)
 #include "../ports/bsp/samd51/tx_initialize_low_level.S"
 #include "../ports/arch/cortex_m4/tx_thread_context_restore.S"
 #include "../ports/arch/cortex_m4/tx_thread_context_save.S"

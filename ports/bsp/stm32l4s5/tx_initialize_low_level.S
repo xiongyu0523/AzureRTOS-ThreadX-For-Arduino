@@ -41,6 +41,7 @@ CORE_HZ           =   120000000
 OSTICK_HZ         =   100
 SYSTICK_CYCLES    =   ((CORE_HZ / OSTICK_HZ) - 1)
 
+    .cpu cortex-m4
     .text 32
     .align 4
     .syntax unified
