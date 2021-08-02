@@ -1,5 +1,7 @@
 # Azure RTOS ThreadX For Arduino
 
+[![Arduino_CI](https://github.com/xiongyu0523/AzureRTOS-ThreadX-For-Arduino/workflows/Arduino_CI/badge.svg)](https://github.com/marketplace/actions/arduino_ci)
+
 This is a port of Azure RTOS ThreadX to Arduino as a Library. For more information about Azure RTOS, please visit Microsoft Doc and source code on Github.
 
 ## Hardware support
