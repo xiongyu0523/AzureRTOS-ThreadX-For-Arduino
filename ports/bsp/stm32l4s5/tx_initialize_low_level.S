@@ -20,36 +20,35 @@
 @/**************************************************************************/
 @/**************************************************************************/
 @
-@#define TX_SOURCE_CODE
+@
+    .global     _tx_thread_system_stack_ptr
+    .global     _tx_initialize_unused_memory
+    .global     _tx_timer_interrupt
+    .global     __main
+    .global     __tx_SVCallHandler
+    .global     __tx_PendSVHandler
+    .global     g_pfnVectors
+    .global     __tx_NMIHandler                     @ NMI
+    .global     __tx_BadHandler                     @ HardFault
+    .global     __tx_SVCallHandler                  @ SVCall
+    .global     __tx_DBGHandler                     @ Monitor
+    .global     __tx_PendSVHandler                  @ PendSV
+    .global     __tx_SysTickHandler                 @ SysTick
+    .global     __tx_IntHandler                     @ Int 0
 @
 @
-@/* Include necessary system files.  */
-@
-@#include "tx_api.h"
-@#include "tx_initialize.h"
-@#include "tx_thread.h"
-@#include "tx_timer.h"
-@
-@
-    .global  _tx_thread_system_stack_ptr
-    .global  _tx_thread_context_save
-    .global  _tx_thread_context_restore
-    .global  _tx_timer_interrupt
-    .global  exception_table
-@
-@
-CPU_HZ            =   F_CPU
+CORE_HZ           =   120000000
 OSTICK_HZ         =   100
-SYSTICK_CYCLES    =   ((CPU_HZ / OSTICK_HZ) - 1)
+SYSTICK_CYCLES    =   ((CORE_HZ / OSTICK_HZ) - 1)
 
-    .text
+    .text 32
     .align 4
     .syntax unified
 @/**************************************************************************/
 @/*                                                                        */
 @/*  FUNCTION                                               RELEASE        */
 @/*                                                                        */
-@/*    _tx_initialize_low_level                          Cortex-M0/GNU     */
+@/*    _tx_initialize_low_level                          Cortex-M4/GNU     */
 @/*                                                           6.1          */
 @/*  AUTHOR                                                                */
 @/*                                                                        */
@@ -84,9 +83,9 @@ SYSTICK_CYCLES    =   ((CPU_HZ / OSTICK_HZ) - 1)
 @/*    DATE              NAME                      DESCRIPTION             */
 @/*                                                                        */
 @/*  05-19-2020     William E. Lamie         Initial Version 6.0           */
-@/*  09-30-2020     Scott Larson             Modified comment(s), and      */
-@/*                                            commented out code for      */
-@/*                                            enabling DWT,               */
+@/*  09-30-2020     William E. Lamie         Modified Comment(s), fixed    */
+@/*                                            GNU assembly comment,       */
+@/*                                            cleaned up whitespace,      */
 @/*                                            resulting in version 6.1    */
 @/*                                                                        */
 @/**************************************************************************/
@@ -100,82 +99,128 @@ _tx_initialize_low_level:
 @
     CPSID   i
 @
-@    /* Enable the cycle count register.  */
-@    /* Not all M0 have DWT, uncomment if you have a DWT and want to use it. */
-@    LDR     r0, =0xE0001000                         @ Build address of DWT register
-@    LDR     r1, [r0]                                @ Pickup the current value
-@    MOVS    r2, #1
-@    ORRS    r1, r1, r2                              @ Set the CYCCNTENA bit
-@    STR     r1, [r0]                                @ Enable the cycle count register 
-@
 @    /* Setup Vector Table Offset Register.  */
-@    
-    LDR     r0, =0xE000E000                         @ Build address of NVIC registers
-    LDR     r2, =0xD08                              @ Offset to vector base register
-    ADD     r0, r0, r2                              @ Build vector base register
-    LDR     r1, =exception_table                    @ Pickup address of vector table
-    STR     r1, [r0]                                @ Set vector table address    
+@
+    MOV     r0, #0xE000E000                         @ Build address of NVIC registers
+    LDR     r1, =g_pfnVectors                       @ Pickup address of vector table
+    STR     r1, [r0, #0xD08]                        @ Set vector table address
 @
 @    /* Set system stack pointer from vector value.  */
 @
     LDR     r0, =_tx_thread_system_stack_ptr        @ Build address of system stack pointer
-    LDR     r1, =exception_table                    @ Pickup address of vector table
+    LDR     r1, =g_pfnVectors                       @ Pickup address of vector table
     LDR     r1, [r1]                                @ Pickup reset stack pointer
     STR     r1, [r0]                                @ Save system stack pointer
 @
+@    /* Enable the cycle count register.  */
+@
+    LDR     r0, =0xE0001000                         @ Build address of DWT register
+    LDR     r1, [r0]                                @ Pickup the current value
+    ORR     r1, r1, #1                              @ Set the CYCCNTENA bit
+    STR     r1, [r0]                                @ Enable the cycle count register
+@
 @    /* Configure SysTick for 100Hz clock, or 16384 cycles if no reference.  */
 @
-    LDR     r0, =0xE000E000                         @ Build address of NVIC registers
+    MOV     r0, #0xE000E000                         @ Build address of NVIC registers
     LDR     r1, =SYSTICK_CYCLES
     STR     r1, [r0, #0x14]                         @ Setup SysTick Reload Value
-    LDR     r1, =0x7                                @ Build SysTick Control Enable Value
+    MOV     r1, #0x7                                @ Build SysTick Control Enable Value
     STR     r1, [r0, #0x10]                         @ Setup SysTick Control
 @
 @    /* Configure handler priorities.  */
 @
     LDR     r1, =0x00000000                         @ Rsrv, UsgF, BusF, MemM
-    LDR     r0, =0xE000E000                         @ Build address of NVIC registers
-    LDR     r2, =0xD18                              @
-    ADD     r0, r0, r2                              @ 
-    STR     r1, [r0]                                @ Setup System Handlers 4-7 Priority Registers
+    STR     r1, [r0, #0xD18]                        @ Setup System Handlers 4-7 Priority Registers
+
     LDR     r1, =0xFF000000                         @ SVCl, Rsrv, Rsrv, Rsrv
-    LDR     r0, =0xE000E000                         @ Build address of NVIC registers
-    LDR     r2, =0xD1C                              @ 
-    ADD     r0, r0, r2                              @ 
-    STR     r1, [r0]                                @ Setup System Handlers 8-11 Priority Registers
+    STR     r1, [r0, #0xD1C]                        @ Setup System Handlers 8-11 Priority Registers
                                                     @ Note: SVC must be lowest priority, which is 0xFF
+
     LDR     r1, =0x40FF0000                         @ SysT, PnSV, Rsrv, DbgM
-    LDR     r0, =0xE000E000                         @ Build address of NVIC registers
-    LDR     r2, =0xD20                              @   
-    ADD     r0, r0, r2                              @ 
-    STR     r1, [r0]                                @ Setup System Handlers 12-15 Priority Registers
+    STR     r1, [r0, #0xD20]                        @ Setup System Handlers 12-15 Priority Registers
                                                     @ Note: PnSV must be lowest priority, which is 0xFF
-        
+
 @
 @    /* Return to caller.  */
-@    
-    BX      lr 
+@
+    BX      lr
 @}
 @
+
+@/* Define shells for each of the unused vectors.  */
+@
+    .global  __tx_BadHandler
+    .thumb_func
+__tx_BadHandler:
+    B       __tx_BadHandler
+
+@ /* added to catch the hardfault */
+
+    .global  __tx_HardfaultHandler
+    .thumb_func
+__tx_HardfaultHandler:
+    B       __tx_HardfaultHandler
+
+
+@ /* added to catch the SVC */
+
+    .global  __tx_SVCallHandler
+    .thumb_func
+__tx_SVCallHandler:
+    B       __tx_SVCallHandler
+
+
+@ /* Generic interrupt handler template */
+    .global  __tx_IntHandler
+    .thumb_func
+__tx_IntHandler:
+@ VOID InterruptHandler (VOID)
+@ {
+    PUSH    {r0, lr}
+#ifdef TX_ENABLE_EXECUTION_CHANGE_NOTIFY
+    BL      _tx_execution_isr_enter             @ Call the ISR enter function
+#endif
+
+@    /* Do interrupt handler work here */
+@    /* BL <your C Function>.... */
+
+#ifdef TX_ENABLE_EXECUTION_CHANGE_NOTIFY
+    BL      _tx_execution_isr_exit              @ Call the ISR exit function
+#endif
+    POP     {r0, lr}
+    BX      LR
+@ }
+
 @ /* System Tick timer interrupt handler */
     .global  __tx_SysTickHandler
-    .global  sysTickHook
+    .global  osSystickHandler
     .thumb_func
 __tx_SysTickHandler:
     .thumb_func
-sysTickHook:
-@ VOID SysTick_Handler (VOID)
+osSystickHandler:
+@ VOID TimerInterruptHandler (VOID)
 @ {
 @
     PUSH    {r0, lr}
 #ifdef TX_ENABLE_EXECUTION_CHANGE_NOTIFY
-    BL      _tx_execution_isr_enter                 @ Call the ISR enter function
+    BL      _tx_execution_isr_enter             @ Call the ISR enter function
 #endif
     BL      _tx_timer_interrupt
 #ifdef TX_ENABLE_EXECUTION_CHANGE_NOTIFY
-    BL      _tx_execution_isr_exit                  @ Call the ISR exit function
+    BL      _tx_execution_isr_exit              @ Call the ISR exit function
 #endif
-    POP     {r0, r1}
-    MOV     lr, r1
-    BX      lr
+    POP     {r0, lr}
+    BX      LR
 @ }
+
+
+@ /* NMI, DBG handlers */
+    .global  __tx_NMIHandler
+    .thumb_func
+__tx_NMIHandler:
+    B       __tx_NMIHandler
+
+    .global  __tx_DBGHandler
+    .thumb_func
+__tx_DBGHandler:
+    B       __tx_DBGHandler

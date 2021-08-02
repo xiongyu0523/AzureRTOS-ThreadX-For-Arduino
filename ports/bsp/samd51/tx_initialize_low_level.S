@@ -37,7 +37,9 @@
     .global     __tx_IntHandler                     @ Int 0
 @
 @
-SYSTICK_CYCLES    =   ((F_CPU / 100) -1)
+CPU_HZ            =   F_CPU
+OSTICK_HZ         =   100
+SYSTICK_CYCLES    =   ((CPU_HZ / OSTICK_HZ) - 1)
 
     .text 32
     .align 4
