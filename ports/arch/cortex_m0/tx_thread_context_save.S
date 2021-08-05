@@ -26,7 +26,6 @@
     .global  _tx_execution_isr_enter
 @
 @
-
     .text 32
     .align 4
     .syntax unified

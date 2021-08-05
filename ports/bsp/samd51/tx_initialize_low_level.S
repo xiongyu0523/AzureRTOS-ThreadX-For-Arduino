@@ -198,7 +198,7 @@ __tx_IntHandler:
 __tx_SysTickHandler:
     .thumb_func
 sysTickHook:
-@ VOID TimerInterruptHandler (VOID)
+@ VOID sysTickHook (VOID)
 @ {
 @
     PUSH    {r0, lr}

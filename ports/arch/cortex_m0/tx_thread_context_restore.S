@@ -34,7 +34,6 @@
 #endif
 @
 @
-
     .text 32
     .align 4
     .syntax unified

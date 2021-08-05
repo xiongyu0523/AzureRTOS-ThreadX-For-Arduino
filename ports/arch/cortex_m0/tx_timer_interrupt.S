@@ -32,7 +32,6 @@
     .global _tx_timer_expiration_process
 @
 @
-
     .text
     .align 4
     .syntax unified
