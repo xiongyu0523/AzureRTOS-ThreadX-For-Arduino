@@ -29,7 +29,7 @@
     .global tx_low_power_enter
     .global tx_low_power_exit
 #endif
-    .cpu cortex-m4
+
     .text
     .align 4
     .syntax unified

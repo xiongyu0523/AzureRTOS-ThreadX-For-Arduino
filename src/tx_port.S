@@ -1,4 +1,5 @@
 #if defined(__SAMD21G18A__)
+.cpu cortex-m0plus
 #include "../ports/bsp/samd21/tx_initialize_low_level.S"
 #include "../ports/arch/cortex_m0/tx_thread_context_restore.S"
 #include "../ports/arch/cortex_m0/tx_thread_context_save.S"
@@ -10,6 +11,7 @@
 #include "../ports/arch/cortex_m0/tx_thread_system_return.S"
 #include "../ports/arch/cortex_m0/tx_timer_interrupt.S"
 #elif (defined(__SAMD51P19A__) || defined(__SAMD51J19A__))
+.cpu cortex-m4
 #include "../ports/bsp/samd51/tx_initialize_low_level.S"
 #include "../ports/arch/cortex_m4/tx_thread_context_restore.S"
 #include "../ports/arch/cortex_m4/tx_thread_context_save.S"
@@ -21,6 +23,7 @@
 #include "../ports/arch/cortex_m4/tx_thread_system_return.S"
 #include "../ports/arch/cortex_m4/tx_timer_interrupt.S"
 #elif defined(STM32L4xx)
+.cpu cortex-m4
 #include "../ports/bsp/stm32l4s5/tx_initialize_low_level.S"
 #include "../ports/arch/cortex_m4/tx_thread_context_restore.S"
 #include "../ports/arch/cortex_m4/tx_thread_context_save.S"

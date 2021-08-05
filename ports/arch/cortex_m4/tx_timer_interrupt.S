@@ -29,7 +29,7 @@
     .global _tx_timer_expired
     .global _tx_thread_time_slice
     .global _tx_timer_expiration_process
-    .cpu cortex-m4
+
     .text
     .align 4
     .syntax unified

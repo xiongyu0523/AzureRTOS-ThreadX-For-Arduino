@@ -26,7 +26,7 @@
     .global  _tx_execution_isr_enter
 @
 @
-    .cpu cortex-m0
+
     .text 32
     .align 4
     .syntax unified

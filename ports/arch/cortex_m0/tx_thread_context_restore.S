@@ -34,7 +34,7 @@
 #endif
 @
 @
-    .cpu cortex-m0
+
     .text 32
     .align 4
     .syntax unified
