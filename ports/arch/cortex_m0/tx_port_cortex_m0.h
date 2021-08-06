@@ -56,8 +56,8 @@
 /*                                                                        */
 /**************************************************************************/
 
-#ifndef TX_PORT_CM0_H
-#define TX_PORT_CM0_H
+#ifndef TX_PORT_CORTEX_CM0_H
+#define TX_PORT_CORTEX_CM0_H
 
 
 /* Determine if the optional ThreadX user define file should be used.  */

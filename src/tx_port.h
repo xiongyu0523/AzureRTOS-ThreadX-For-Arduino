@@ -7,9 +7,9 @@
 #define TX_PORT_H
 
 #if defined(__SAMD21G18A__)
-#include "../ports/arch/cortex_m0/tx_port_cm0.h"
+#include "../ports/arch/cortex_m0/tx_port_cortex_cm0.h"
 #elif (defined(__SAMD51P19A__) || defined(__SAMD51J19A__) || defined(STM32L4xx))
-#include "../ports/arch/cortex_m4/tx_port_cm4.h"
+#include "../ports/arch/cortex_m4/tx_port_cortex_cm4.h"
 #else
 #error "Microcontroller is not supported!"
 #endif
