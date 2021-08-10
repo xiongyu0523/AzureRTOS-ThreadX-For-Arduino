@@ -1,13 +1,13 @@
 # script to update Azure RTOS ThreadX from Microsoft official repo
 
 $Response = Invoke-WebRequest https://api.github.com/repos/azure-rtos/threadx/releases/latest
-$vesion = ($Response | ConvertFrom-Json).tag_name
+$version = ($Response | ConvertFrom-Json).tag_name
 
-Write-Host "The latest Azure RTOS ThreadX version is $vesion"
+Write-Host "The latest Azure RTOS ThreadX version is $version"
 
 git clone https://github.com/azure-rtos/threadx
 Set-Location threadx
-git checkout -b $vesion $vesion
+git checkout -b $version $version
 Set-Location ..
 
 Write-Host "Copying files..."
@@ -28,4 +28,4 @@ foreach($arch in $arch_list){
 
 Remove-Item -Force -Recurse -Path "threadx" 
 
-Write-Host "Updatge done! Need manually update tx_initialize_low_level.S for each bsp"
+Write-Host "Update done! You may need to manually update tx_initialize_low_level.S for each BSP"
