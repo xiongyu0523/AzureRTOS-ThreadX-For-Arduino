@@ -54,8 +54,8 @@
 /*                                                                        */
 /**************************************************************************/
 
-#ifndef TX_PORT_CORTEX_CM4_H
-#define TX_PORT_CORTEX_CM4_H
+#ifndef TX_PORT_CORTEX_M4.H
+#define TX_PORT_CORTEX_M4.H
 
 
 /* Determine if the optional ThreadX user define file should be used.  */
@@ -710,3 +710,4 @@ extern  CHAR                    _tx_version_id[];
 
 
 #endif
+
