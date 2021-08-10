@@ -18,11 +18,12 @@ Copy-Item -Force -Path "threadx/common/inc/*" -Destination "src/"
 $arch_list = Get-Childitem -Path "ports/arch" -Directory
 
 foreach($arch in $arch_list){
+    $arch_name = $arch.Name
 
-    Copy-Item -Force -Path "threadx/ports/$arch/gnu/src/*" -Destination "ports/arch/$arch/"
-    Copy-Item -Force -Path "threadx/ports/$arch/gnu/inc/tx_port.h" -Destination "ports/arch/$arch/tx_port_$arch.h"
+    Copy-Item -Force -Path "threadx/ports/$arch_name/gnu/src/*" -Destination "ports/arch/$arch_name/"
+    Copy-Item -Force -Path "threadx/ports/$arch_name/gnu/inc/tx_port.h" -Destination "ports/arch/$arch_name/tx_port_$arch_name.h"
 
-    (Get-Content -Path "ports/arch/$arch/tx_port_$arch.h" -Raw) -replace "TX_PORT_H", "TX_PORT_$arch.h".ToUpper() | Set-Content -Path "ports/arch/$arch/tx_port_$arch.h"
+    (Get-Content -Path "ports/arch/$arch_name/tx_port_$arch_name.h" -Raw) -replace "TX_PORT_H", "TX_PORT_$arch_name.h".ToUpper() | Set-Content -Path "ports/arch/$arch_name/tx_port_$arch_name.h"
 }
 
 Remove-Item -Force -Recurse -Path "threadx" 
