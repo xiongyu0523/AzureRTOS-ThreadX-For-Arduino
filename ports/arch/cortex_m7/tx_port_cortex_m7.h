@@ -25,7 +25,7 @@
 /*                                                                        */
 /*  PORT SPECIFIC C INFORMATION                            RELEASE        */
 /*                                                                        */
-/*    tx_port.h                                         Cortex-M4/GNU     */
+/*    tx_port.h                                         Cortex-M7/GNU     */
 /*                                                           6.1.7        */
 /*                                                                        */
 /*  AUTHOR                                                                */
@@ -54,8 +54,8 @@
 /*                                                                        */
 /**************************************************************************/
 
-#ifndef TX_PORT_CORTEX_M4.H
-#define TX_PORT_CORTEX_M4.H
+#ifndef TX_PORT_CORTEX_M7.H
+#define TX_PORT_CORTEX_M7.H
 
 
 /* Determine if the optional ThreadX user define file should be used.  */
@@ -699,7 +699,7 @@ void    tx_thread_fpu_disable(void);
 
 #ifdef TX_THREAD_INIT
 CHAR                            _tx_version_id[] =
-                                    "Copyright (c) Microsoft Corporation. All rights reserved.  *  ThreadX Cortex-M4/GNU Version 6.1.7 *";
+                                    "Copyright (c) Microsoft Corporation. All rights reserved.  *  ThreadX Cortex-M7/GNU Version 6.1.7 *";
 #else
 #ifdef TX_MISRA_ENABLE
 extern  CHAR                    _tx_version_id[100];

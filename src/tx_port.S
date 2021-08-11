@@ -34,6 +34,18 @@
 #include "../ports/arch/cortex_m4/tx_thread_stack_build.S"
 #include "../ports/arch/cortex_m4/tx_thread_system_return.S"
 #include "../ports/arch/cortex_m4/tx_timer_interrupt.S"
+#elif defined(STM32F7xx)
+.cpu cortex-m7
+#include "../ports/bsp/stm32f746/tx_initialize_low_level.S"
+#include "../ports/arch/cortex_m7/tx_thread_context_restore.S"
+#include "../ports/arch/cortex_m7/tx_thread_context_save.S"
+#include "../ports/arch/cortex_m7/tx_thread_interrupt_control.S"
+#include "../ports/arch/cortex_m7/tx_thread_interrupt_disable.S"
+#include "../ports/arch/cortex_m7/tx_thread_interrupt_restore.S"
+#include "../ports/arch/cortex_m7/tx_thread_schedule.S"
+#include "../ports/arch/cortex_m7/tx_thread_stack_build.S"
+#include "../ports/arch/cortex_m7/tx_thread_system_return.S"
+#include "../ports/arch/cortex_m7/tx_timer_interrupt.S"
 #else
 #error "Microcontroller is not supported!"
 #endif
