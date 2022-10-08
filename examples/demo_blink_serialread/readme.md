@@ -431,7 +431,6 @@ In this section we will use the single-threaded ThreadX Blink code to create a m
 
     </p>
     </details>
-    <br/>
 
 3. (9) Define the new thread's entry function `thread_1_entry()`. Place the function after `thread_0_entry()` and before `tx_application_define()`.
 
@@ -455,7 +454,6 @@ In this section we will use the single-threaded ThreadX Blink code to create a m
 
     </p>
     </details>
-    <br/>
 
 4. (10) Add serial read logic into the thread's entry function.
 
@@ -485,7 +483,6 @@ In this section we will use the single-threaded ThreadX Blink code to create a m
 
     </p>
     </details>
-    <br/>
 
 5. (11) Create the new thread with `tx_thread_create()`. Add this function call to `tx_application_define()` after the creation of `thread_0`.
 
@@ -552,7 +549,6 @@ In this section we will use the single-threaded ThreadX Blink code to create a m
 
         <img src="docs/SerialMonitor_HelloBlinkyInput.png" alt="Hello Blinky! serial monitor output." width="800"/>
 
-   
 ### Deep Dive
 
 <details><summary><i>Code</i></summary>
