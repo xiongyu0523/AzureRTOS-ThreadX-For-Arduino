@@ -294,12 +294,12 @@ In this section we will convert the bare metal Blink example to a single-threade
 
     [`tx_thread_create()`](https://learn.microsoft.com/azure/rtos/threadx/chapter4#tx_thread_create) creates a thread with specified arguments. The arguments used in this example reflect the following:
 
-    - `&thread_0` : Pointer to the defined thread control block. (See step 3.)
+    - `&thread_0` : Pointer to the defined thread control block. (See step 4.)
     - `"thread_0"` : The thread name (i.e., pointer to the name.)  
-    - `thread_0_entry` : The user-defined thread entry function. (See step 4.)
+    - `thread_0_entry` : The user-defined thread entry function. (See step 5.)
     - `0` : Entry input to the thread. _We are not utilizing this argument_.
-    - `thread_0_stack` : Pointer to the start of the thread's stack. (See step 3.)
-    - `THREAD_STACK_SIZE`: Size of the thread's stack in bytes. (See step 3.)
+    - `thread_0_stack` : Pointer to the start of the thread's stack. (See step 4.)
+    - `THREAD_STACK_SIZE`: Size of the thread's stack in bytes. (See step 4.)
     - `1` : The **_priority level_** of the thread.
     - `1` : The **_preemption threshold_** of the thread.
     - `TX_NO_TIME_SLICE` : Time slicing is disabled.
@@ -427,7 +427,7 @@ In this section we will use the single-threaded ThreadX Blink code to create a m
     <details><summary><i>What is going on?</i></summary>
     <p>
 
-    This action mimics _Part 2: Step 3_. For each **_thread_** you want to add, you will need to allocate its stack memory and declare its **_thread_control block_** `TX_THREAD`.
+    This action mimics _Part 2: Step 4_. For each **_thread_** you want to add, you will need to allocate its stack memory and declare its **_thread_control block_** `TX_THREAD`.
 
     </p>
     </details>
@@ -450,7 +450,7 @@ In this section we will use the single-threaded ThreadX Blink code to create a m
     <details><summary><i>What is going on?</i></summary>
     <p>
 
-    This action mimics _Part 2: Step 3_. Each thread needs a user-defined entry function to execute the thread logic.
+    This action mimics _Part 2: Step 5_. Each thread needs a user-defined entry function to execute the thread logic.
 
     </p>
     </details>
@@ -508,7 +508,7 @@ In this section we will use the single-threaded ThreadX Blink code to create a m
     <details><summary><i>What is going on?</i></summary>
     <p>
 
-    This action mimics _Part 2: Step 7_. The differences are found in the arguments used. Notice how naming has changed to reflect `thread_1`:
+    This action mimics _Part 2: Step 8_. The differences are found in the arguments used. Notice how naming has changed to reflect `thread_1`:
 
     - `&thread_1` : Pointer to the defined thread control block.
     - `"thread_1"` : The thread name (i.e., pointer to the name).
