@@ -547,7 +547,7 @@ In this section we will use the single-threaded ThreadX Blink code to create a m
 
     - Select **'Send'**.
 
-        <img src="docs/SerialMonitor_HelloBlinkyInput.png" alt="Hello Blinky! serial monitor output." width="800"/>
+        <img src="docs/SerialMonitor_HelloBlinkyOutput.png" alt="Hello Blinky! serial monitor output." width="800"/>
 
 ### Deep Dive
 
