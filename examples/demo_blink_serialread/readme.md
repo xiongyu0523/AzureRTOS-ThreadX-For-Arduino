@@ -320,7 +320,7 @@ In this section we will convert the bare metal Blink example to a single-threade
 
 9. (8) Run the Blink example using Azure RTOS ThreadX.  
 
-Follow the _2. Connect your device_ and _3. Run the example_ steps from [Part 1: Run the Arduino Blink example](#part-1-run-the-arduino-blink-example).
+    Follow the _2. Connect your device_ and _3. Run the example_ steps from [Part 1: Run the Arduino Blink example](#part-1-run-the-arduino-blink-example).
    
 ### Deep Dive
 
