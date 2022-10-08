@@ -15,7 +15,7 @@ Microsoft's Azure RTOS ThreadX is open source! We want to show you the basics of
     - [Deep Dive](#deep-dive-1)
   - [Part 3: Apply multi-threading to the Blink example via ThreadX](#part-3-apply-multi-threading-to-the-blink-example-via-threadx)
     - [Deep Dive](#deep-dive-2)
-  - [Further Reading](further-reading)
+  - [Further Reading](#further-reading)
   
 ## Introduction
 
