@@ -10,3 +10,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: Arduino-CI/action@stable-1.x # or latest, or a pinned version
+
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: arduino/arduino-lint-action@v1
