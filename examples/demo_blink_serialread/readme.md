@@ -70,12 +70,7 @@ In this section we will run the traditional Blink example to confirm the device 
     - Navigate to **File > Examples > 01.Basics**.
     - Select **'Blink'**.
     
-2. Save the example. 
-
-    - Navigate to **File > Save As**.
-    - Save the sketch as **'Blink_ThreadX'**.
-    
-3. Connect your device.
+2. Connect your device.
    
    - Plug in your device to your PC.
    - Navigate to **Tools > Board: ... > Arduino SAMD Boards (32-bits ARM Cortex-M0+)**
@@ -83,7 +78,7 @@ In this section we will run the traditional Blink example to confirm the device 
    - Navigate to **Tools > Port**.
    - Select **'\<Port associated with device\>'**.
 
-4. Run the example.
+3. Run the example.
    
    - In the top left corner, select the **'Upload'** icon. _Verification will automatically occur first._
    - Observe the LED blink on and off every 1 second.
@@ -127,7 +122,12 @@ See full Arduino [Blink](https://www.arduino.cc/en/Tutorial/BuiltInExamples/Blin
 ## Part 2: Convert the Blink example via ThreadX
 In this section we will convert the bare metal Blink example to a single-threaded RTOS version using ThreadX.
 
-1. Add the Azure RTOS ThreadX library header file `tx_api.h` near the top of the file. Place it after the commentary, but before the `setup()` function.
+1. Save the example. 
+
+    - Navigate to **File > Save As**.
+    - Save the sketch as **'Blink_ThreadX'**.
+
+2. (1) Add the Azure RTOS ThreadX library header file `tx_api.h` near the top of the file. Place it after the commentary, but before the `setup()` function.
 
     ```
     /* (1) Include the Azure RTOS ThreadX library header file. */
@@ -142,7 +142,7 @@ In this section we will convert the bare metal Blink example to a single-threade
     </p>
     </details>
 
-2. Add the **_kernel_** entry function `tx_kernel_enter()` to `setup()`.
+3. (2) Add the **_kernel_** entry function `tx_kernel_enter()` to `setup()`.
 
     ```
     // the setup function runs once when you press reset or power the board
@@ -169,7 +169,7 @@ In this section we will convert the bare metal Blink example to a single-threade
     </p>
     </details>
 
-3. Add the **_thread_** stack memory and the **_thread control block_**. Place this near the top of the file after `#include <tx_api.h>` and before `setup()`.
+4. (3) Add the **_thread_** stack memory and the **_thread control block_**. Place this near the top of the file after `#include <tx_api.h>` and before `setup()`.
 
     ```
     /* (3) Add the thread stack memory and thread control block. */
@@ -192,7 +192,7 @@ In this section we will convert the bare metal Blink example to a single-threade
     </p>
     </details>
 
-4. Define the thread's entry function `thread_0_entry()`. Place the function definition after the `thread_0_stack` array and before `setup()`.
+5. (4) Define the thread's entry function `thread_0_entry()`. Place the function definition after the `thread_0_stack` array and before `setup()`.
    
     ```
     /* (4) Define the thread's entry function. */
@@ -215,7 +215,7 @@ In this section we will convert the bare metal Blink example to a single-threade
     </p>
     </details>
 
-5. Move the LED blink logic from `loop()` into the thread's entry function.  Replace the `delay(1000)` with `tx_thread_sleep(TX_TIMER_TICKS_PER_SECOND)`.
+6. (5) Move the LED blink logic from `loop()` into the thread's entry function.  Replace the `delay(1000)` with `tx_thread_sleep(TX_TIMER_TICKS_PER_SECOND)`.
    
     ```
     void thread_0_entry(ULONG thread_input)
@@ -249,7 +249,7 @@ In this section we will convert the bare metal Blink example to a single-threade
     </p>
     </details>
 
-6. Add the application's environment setup function `tx_application_define()`. Place this function after `thread_0_entry()` and before `setup()`.
+7. (6) Add the application's environment setup function `tx_application_define()`. Place this function after `thread_0_entry()` and before `setup()`.
 
     ```
     /* (6) Add the application's environment setup function. */
@@ -272,7 +272,7 @@ In this section we will convert the bare metal Blink example to a single-threade
     </p>
     </details>
 
-7. Create the thread with `tx_thread_create()`. Add this function call to `tx_application_define()`.
+8. (7) Create the thread with `tx_thread_create()`. Add this function call to `tx_application_define()`.
 
     ```
     void tx_application_define(void *first_unused_memory)
@@ -318,9 +318,9 @@ In this section we will convert the bare metal Blink example to a single-threade
     </p>
     </details>
 
-8. Run the Blink example using Azure RTOS ThreadX.  
+9. (8) Run the Blink example using Azure RTOS ThreadX.  
 
-Follow the _3. Connect your device_ and _4. Run the example_ steps from [Part 1: Run the Arduino Blink example](#part-1-run-the-arduino-blink-example).
+Follow the _2. Connect your device_ and _3. Run the example_ steps from [Part 1: Run the Arduino Blink example](#part-1-run-the-arduino-blink-example).
    
 ### Deep Dive
 
@@ -541,7 +541,7 @@ In this section we will use the single-threaded ThreadX Blink code to create a m
 
 6. Run the multi-threaded Blink example using Azure RTOS ThreadX.
 
-    - Follow the _3. Connect your device_ and _4. Run the example_ steps from [Part 1: Run the Arduino Blink example](#part-1-run-the-arduino-blink-example).
+    - Follow the _2. Connect your device_ and _3. Run the example_ steps from [Part 1: Run the Arduino Blink example](#part-1-run-the-arduino-blink-example).
     - Observe the LED blink on and off every 1 second.
     - Navigate to **Tools > Serial Monitor**.
     - Type _Hello Blinky!_ into the serial input line.
