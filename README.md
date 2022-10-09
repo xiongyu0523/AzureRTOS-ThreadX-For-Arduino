@@ -23,6 +23,7 @@ The version of this library is evolving independent to Azure RTOS ThreadX versio
 | - | - | - |
 | v1.0.0 | [v6.1.7](https://github.com/azure-rtos/threadx/tree/v6.1.7_rel)  | Initial release |
 | v1.0.1 | [v6.1.12](https://github.com/azure-rtos/threadx/tree/v6.1.7_rel)  | Update ThreadX version |
+| v1.0.2 | [v6.1.12](https://github.com/azure-rtos/threadx/tree/v6.1.7_rel)  | Add Arduino IDE keywords |
 
 ## License
 
