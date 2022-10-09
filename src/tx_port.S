@@ -10,6 +10,18 @@
 #include "../ports/arch/cortex_m0/tx_thread_stack_build.S"
 #include "../ports/arch/cortex_m0/tx_thread_system_return.S"
 #include "../ports/arch/cortex_m0/tx_timer_interrupt.S"
+#elif defined(ARDUINO_ARCH_RP2040)
+.cpu cortex-m0plus
+#include "../ports/bsp/rp2040/tx_initialize_low_level.S"
+#include "../ports/arch/cortex_m0/tx_thread_context_restore.S"
+#include "../ports/arch/cortex_m0/tx_thread_context_save.S"
+#include "../ports/arch/cortex_m0/tx_thread_interrupt_control.S"
+#include "../ports/arch/cortex_m0/tx_thread_interrupt_disable.S"
+#include "../ports/arch/cortex_m0/tx_thread_interrupt_restore.S"
+#include "../ports/arch/cortex_m0/tx_thread_schedule.S"
+#include "../ports/arch/cortex_m0/tx_thread_stack_build.S"
+#include "../ports/arch/cortex_m0/tx_thread_system_return.S"
+#include "../ports/arch/cortex_m0/tx_timer_interrupt.S"
 #elif (defined(__SAMD51P19A__) || defined(__SAMD51J19A__))
 .cpu cortex-m4
 #include "../ports/bsp/samd51/tx_initialize_low_level.S"
