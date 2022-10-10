@@ -3,7 +3,7 @@
  *
  * This is a basic multi-threading demo using the Azure RTOS ThreadX for
  * Arduino library. It combines the classic Blink example with serial input.
- * This sketch is part of the Azure RTOS ThreadX tutorial series published on 
+ * This sketch is part of the Azure RTOS ThreadX tutorial series published on
  * Hackster.io.
  */
 
@@ -30,7 +30,7 @@ void thread_0_entry(ULONG thread_input)
     digitalWrite(LED_BUILTIN, HIGH);            // turn the LED on
     tx_thread_sleep(TX_TIMER_TICKS_PER_SECOND); // wait for a second
     digitalWrite(LED_BUILTIN, LOW);             // turn the LED off
-    tx_thread_sleep(TX_TIMER_TICKS_PER_SECOND); // wait for a second  
+    tx_thread_sleep(TX_TIMER_TICKS_PER_SECOND); // wait for a second
   }
 }
 
@@ -58,14 +58,14 @@ void tx_application_define(void *first_unused_memory)
   (VOID)first_unused_memory;
 
   /* Put system definition stuff in here, e.g. thread creates and other assorted
-     create information.  */
+     create information. */
 
   /* (7)(11) Create the thread. */
-  tx_thread_create(&thread_0, "thread 0", thread_0_entry, 0,  
+  tx_thread_create(&thread_0, "thread 0", thread_0_entry, 0,
     thread_0_stack, THREAD_STACK_SIZE, 
     1, 1, TX_NO_TIME_SLICE, TX_AUTO_START);
 
-  tx_thread_create(&thread_1, "thread 1", thread_1_entry, 0,  
+  tx_thread_create(&thread_1, "thread 1", thread_1_entry, 0,
     thread_1_stack, THREAD_STACK_SIZE, 
     4, 4, TX_NO_TIME_SLICE, TX_AUTO_START);
 }
