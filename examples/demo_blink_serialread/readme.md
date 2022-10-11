@@ -2,8 +2,15 @@
 
 Microsoft's Azure RTOS ThreadX is open source! We want to show you the basics of ThreadX so you can start using this industrial-grade RTOS in your Arduino personal projects.
 
-**Total completion time**:  45 minutes
+**Estimated Time:** 1 hour
+- **Setup:** 5 min
+- **Part 1:** 5 min
+- **Part 2:** 30 min
+- **Part 3:** 15 min
 
+**Estimated Cost:** $ of device with [ATSAMD21 or ATSAMD51](https://www.microchip.com/en-us/products/microcontrollers-and-microprocessors/32-bit-mcus/sam-32-bit-mcus/sam-d) chip
+
+**Table of Contents:**
 - [Azure RTOS ThreadX for Arduino 101: Threads](#azure-rtos-threadx-for-arduino-101-threads)
   - [Introduction](#introduction)
     - [What is covered](#what-is-covered)
@@ -21,11 +28,11 @@ Microsoft's Azure RTOS ThreadX is open source! We want to show you the basics of
 
 This tutorial will show you how to use multi-threading with Azure RTOS Threadx for Arduino. You will start with the classic Blink example and convert it.
 
-**_Azure RTOS_**: A Microsoft development suite for embedded IoT applications on microcontrollers (MCUs). [Azure RTOS](https://azure.microsoft.com/products/rtos) can be used **independent** of Microsoft's [Azure](https://azure.microsoft.com/resources/cloud-computing-dictionary/what-is-azure) cloud platform.
+**_Azure RTOS_**: A Microsoft development suite for embedded IoT applications on microcontrollers (MCUs). [Azure RTOS](http://aka.ms/hackster/azurertos) can be used **independent** of Microsoft's [Azure](https://azure.microsoft.com/resources/cloud-computing-dictionary/what-is-azure) cloud platform.
 
-**_Azure RTOS ThreadX_**: One component of the Azure RTOS product offering. [ThreadX](https://learn.microsoft.com/azure/rtos/threadx/overview-threadx) is the real time operating system (RTOS) designed to run on MCUs.
+**_Azure RTOS ThreadX_**: One component of the Azure RTOS product offering. [ThreadX](https://aka.ms/hackster/ThreadX) is the real time operating system (RTOS) designed to run on MCUs.
 
-**_Azure RTOS ThreadX for Arduino_**: A port of Azure RTOS ThreadX to Arduino as a library. Please visit [AzureRTOS-ThreadX-For-Arduino](https://github.com/xiongyu0523/AzureRTOS-ThreadX-For-Arduino) on GitHub for the [source code](https://github.com/xiongyu0523/AzureRTOS-ThreadX-For-Arduino/tree/main/src).
+**_Azure RTOS ThreadX for Arduino_**: A port of Azure RTOS ThreadX to Arduino as a library. Please visit [AzureRTOS-ThreadX-For-Arduino](https://aka.ms/hackster/ThreadXForArduino) on GitHub for the [source code](https://aka.ms/hackster/ThreadXforArduino/src).
 
 ### What is covered
 By the end of this tutorial, you should understand the following:
@@ -34,15 +41,17 @@ By the end of this tutorial, you should understand the following:
 
 **Actions**: How to implement a single thread using ThreadX; How to implement multiple threads using ThreadX
 
-**Final code**: View the full ThreadX multi-threaded Blink code example on [GitHub](<to do>).
+**Final code**: View the full ThreadX multi-threaded Blink code example on [GitHub](./demo_blink_serialread.ino).
 
 ### Prerequisites
 - Have the [Arduino IDE 1.8.x](https://www.arduino.cc/en/software) installed.
-- Have a device using an [ATSAMD21 or ATSAMD51](https://www.microchip.com/en-us/products/microcontrollers-and-microprocessors/32-bit-mcus/sam-32-bit-mcus/sam-d) chip. View this [list](https://github.com/xiongyu0523/AzureRTOS-ThreadX-For-Arduino/tree/main#hardware-support) of verified boards.
+- Have a device using an [ATSAMD21 or ATSAMD51](https://www.microchip.com/en-us/products/microcontrollers-and-microprocessors/32-bit-mcus/sam-32-bit-mcus/sam-d) chip. View this [list](https://aka.ms/hackster/ThreadXforArduino/hardware) of verified boards.
 
-_The following was run on Windows 11, Arduino IDE 1.8.19, and the Arduino MKR WiFi 1010._
+_The following was run on Windows 11, Arduino IDE 1.8.19, and the Arduino MKR WiFi 1010, and the Seeed Studio Wio Terminal._
 
 ## Setup
+
+**Estimated Time:** 5 min
 
 1. Open the Arduino IDE.
 
@@ -64,6 +73,8 @@ _The following was run on Windows 11, Arduino IDE 1.8.19, and the Arduino MKR Wi
 
 ## Part 1: Run the Arduino Blink example
 In this section we will run the traditional Blink example to confirm the device is setup properly.
+
+**Estimated Time:** 5 min
 
 1. Open the Blink example.
 
@@ -122,6 +133,8 @@ See full Arduino [Blink](https://www.arduino.cc/en/Tutorial/BuiltInExamples/Blin
 ## Part 2: Convert the Blink example via ThreadX
 In this section we will convert the bare metal Blink example to a single-threaded RTOS version using ThreadX.
 
+**Estimated Time:** 30 min
+
 1. Save the example. 
 
     - Navigate to **File > Save As**.
@@ -164,7 +177,7 @@ In this section we will convert the bare metal Blink example to a single-threade
 
     > IMPORTANT: _"The call to tx_kernel_enter() does not return, so do not place any processing after it."_
 
-    Please see [Microsoft Learn's ThreadX Chapter 3: Functional Components of ThreadX](https://learn.microsoft.com/azure/rtos/threadx/chapter3) for more information on [`tx_kernel_enter()`](https://learn.microsoft.com/azure/rtos/threadx/chapter3#main-function).
+    Please see [Microsoft Learn's ThreadX Chapter 3: Functional Components of ThreadX](https://aka.ms/hackster/ThreadX/functionalcomponents) for more information on [`tx_kernel_enter()`](https://learn.microsoft.com/azure/rtos/threadx/chapter3#main-function).
 
     </p>
     </details>
@@ -183,11 +196,11 @@ In this section we will convert the bare metal Blink example to a single-threade
     <details><summary><i>What is going on?</i></summary>
     <p>
 
-    A **_thread_** is a specific execution path within a process (i.e., a running application). A thread shares memory space with other threads but has its own allocated stack space. We define this stack size to be `THREAD_STACK_SIZE` bytes and use the array `thread_0_stack` to allocate the memory. Please see [Microsoft Learn's ThreadX Chapter 3: Functional Components of ThreadX](https://learn.microsoft.com/azure/rtos/threadx/chapter3) for more information on the [thread stack area](https://learn.microsoft.com/azure/rtos/threadx/chapter3#thread-stack-area). 
+    A **_thread_** is a specific execution path within a process (i.e., a running application). A thread shares memory space with other threads but has its own allocated stack space. We define this stack size to be `THREAD_STACK_SIZE` bytes and use the array `thread_0_stack` to allocate the memory. Please see [Microsoft Learn's ThreadX Chapter 3: Functional Components of ThreadX](https://aka.ms/hackster/ThreadX/functionalcomponents) for more information on the [thread stack area](https://aka.ms/hackster/ThreadX/functionalcomponents/threadstack). 
 
-    A **_thread control block_** contains specific data for the thread. `TX_THREAD` is the ThreadX data type for a thread control block. Please see [Microsoft Learn's ThreadX Chapter 3: Functional Components of ThreadX](https://learn.microsoft.com/azure/rtos/threadx/chapter3) for more information on [`TX_THREAD`](https://learn.microsoft.com/azure/rtos/threadx/chapter3#thread-control-block-tx_thread).
+    A **_thread control block_** contains specific data for the thread. `TX_THREAD` is the ThreadX data type for a thread control block. Please see [Microsoft Learn's ThreadX Chapter 3: Functional Components of ThreadX](https://aka.ms/hackster/ThreadX/functionalcomponents) for more information on [`TX_THREAD`](https://learn.microsoft.com/azure/rtos/threadx/chapter3#thread-control-block-tx_thread).
 
-    > IMPORTANT: _"ThreadX does not use the term task. Instead, the more descriptive and contemporary name thread is used."_ Please see [Microsoft Learn's ThreadX Chapter 1: Introduction to ThreadX](https://learn.microsoft.com/azure/rtos/threadx/chapter1) for more information on [tasks vs. threads](https://learn.microsoft.com/azure/rtos/threadx/chapter1#tasks-vs-threads).
+    > IMPORTANT: _"ThreadX does not use the term task. Instead, the more descriptive and contemporary name thread is used."_ Please see [Microsoft Learn's ThreadX Chapter 1: Introduction to ThreadX](https://aka.ms/hackster/ThreadX/intro) for more information on [tasks vs. threads](https://aka.ms/hackster/ThreadX/functionalcomponents/tasksvsthreads).
 
     </p>
     </details>
@@ -265,9 +278,9 @@ In this section we will convert the bare metal Blink example to a single-threade
     <details><summary><i>What is going on?</i></summary>
     <p>
 
-    The kernal entry function `tx_kernel_enter()` will call the function `tx_application_define()` to setup the application environment and system resources. _It is the user's responsibility to implement this function_ with the logic to create system resources for the RTOS environment.
+    The kernel entry function `tx_kernel_enter()` will call the function `tx_application_define()` to setup the application environment and system resources. _It is the user's responsibility to implement this function_ with the logic to create system resources for the RTOS environment.
 
-    Please see [Microsoft Learn's ThreadX Chapter 3: Functional Components of ThreadX](https://learn.microsoft.com/azure/rtos/threadx/chapter3) for more information on [`tx_application_define()`](https://learn.microsoft.com/azure/rtos/threadx/chapter3#application-definition-function).
+    Please see [Microsoft Learn's ThreadX Chapter 3: Functional Components of ThreadX](https://aka.ms/hackster/ThreadX/functionalcomponents) for more information on [`tx_application_define()`](https://learn.microsoft.com/azure/rtos/threadx/chapter3#application-definition-function).
     
     </p>
     </details>
@@ -313,7 +326,7 @@ In this section we will convert the bare metal Blink example to a single-threade
     
     The **_preemption threshold_** is unique to ThreadX. Only priorities higher than this threshold may preempt the thread.
 
-    Please see [Microsoft Learn's ThreadX Chapter 3: Functional Components of ThreadX](https://learn.microsoft.com/azure/rtos/threadx/chapter3) for more information on [thread execution](https://learn.microsoft.com/azure/rtos/threadx/chapter3#thread-execution-1), [thread priorities](https://learn.microsoft.com/azure/rtos/threadx/chapter3#thread-priorities), [thread scheduling](https://learn.microsoft.com/azure/rtos/threadx/chapter3#thread-scheduling), and [thread preemption](https://learn.microsoft.com/azure/rtos/threadx/chapter3#preemption).
+    Please see [Microsoft Learn's ThreadX Chapter 3: Functional Components of ThreadX](https://aka.ms/hackster/ThreadX/functionalcomponents) for more information on [thread execution](https://aka.ms/hackster/ThreadX/functionalcomponents/threadexecution), [thread priorities](https://aka.ms/hackster/ThreadX/functionalcomponents/threadpriorities), [thread scheduling](https://aka.ms/hackster/ThreadX/functionalcomponents/threadscheduling), and [thread preemption](https://aka.ms/hackster/ThreadX/functionalcomponents/preemption).
 
     </p>
     </details>
@@ -522,9 +535,9 @@ In this section we will use the single-threaded ThreadX Blink code to create a m
     - `4` : The **_priority level_** of the thread.
     - `4` : The **_preemption threshold_** of the thread.
 
-    Because _4_ is a lower priority level than _1_, `thread_0` will execute first, and only when it suspends (`tx_thread_sleep()`) will the scheduler execute the thread next in line (`thread_1`). Once `thread_0` has completed its suspension, the scheduler will preempt `thread_1` and return execution to `thread_0`.
-
     <br>
+
+    Because _4_ is a lower priority level than _1_, `thread_0` will execute first, and only when it suspends (`tx_thread_sleep()`) will the scheduler execute the thread next in line (`thread_1`). Once `thread_0` has completed its suspension, the scheduler will preempt `thread_1` and return execution to `thread_0`.
 
     The arguments that remain the same are:
 
@@ -650,4 +663,4 @@ We hope to introduce these and other concepts in future tutorials for Azure RTOS
 </details>
 
 ## Further Reading
-Please visit [What is Azure RTOS ThreadX? | Microsoft Learn](https://learn.microsoft.com/azure/rtos/threadx/) to learn more.
+Please visit [What is Azure RTOS ThreadX? | Microsoft Learn](https://aka.ms/hackster/ThreadX/documentation) to learn more.
