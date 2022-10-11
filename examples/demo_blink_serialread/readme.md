@@ -358,10 +358,10 @@ void thread_0_entry(ULONG thread_input)
   while(1)
   {
     /* (5) Move the LED blink logic into the thread's entry function. */
-    digitalWrite(LED_BUILTIN, HIGH);            // turn the LED on
-    tx_thread_sleep(TX_TIMER_TICKS_PER_SECOND); // wait for a second
-    digitalWrite(LED_BUILTIN, LOW);             // turn the LED off
-    tx_thread_sleep(TX_TIMER_TICKS_PER_SECOND); // wait for a second
+    digitalWrite(LED_BUILTIN, HIGH);            /* Turn the LED on.   */
+    tx_thread_sleep(TX_TIMER_TICKS_PER_SECOND); /* Wait for a second. */
+    digitalWrite(LED_BUILTIN, LOW);             /* Turn the LED off.  */
+    tx_thread_sleep(TX_TIMER_TICKS_PER_SECOND); /* Wait for a second. */
   }
 }
 
@@ -379,21 +379,24 @@ void tx_application_define(void *first_unused_memory)
     1, 1, TX_NO_TIME_SLICE, TX_AUTO_START);
 }
 
-// the setup function runs once when you press reset or power the board
-void setup() {
-  // initialize digital pin LED_BUILTIN as an output.
+/* The setup function runs once when you press reset or power the board. */
+void setup()
+{
+  /* Initialize digital pin LED_BUILTIN as an output. */
   pinMode(LED_BUILTIN, OUTPUT);
 
   /* (2) Add the kernel entry function. */
   tx_kernel_enter();
 } 
 
-// the loop function runs over and over again forever
-void loop() {
+void loop()
+{
   /* (5) Move the LED blink logic into the thread's entry function. */
   /* This will never be called. */
 }
 ```
+
+> NOTE: Arduino Blink formatting and single-line style commenting `//` have been converted to ThreadX formatting and multi-line style `/* */`.
 
 </p>
 </details>
@@ -590,10 +593,10 @@ void thread_0_entry(ULONG thread_input)
   while(1)
   {
     /* (5) Move the LED blink logic into the thread's entry function. */
-    digitalWrite(LED_BUILTIN, HIGH);            // turn the LED on
-    tx_thread_sleep(TX_TIMER_TICKS_PER_SECOND); // wait for a second
-    digitalWrite(LED_BUILTIN, LOW);             // turn the LED off
-    tx_thread_sleep(TX_TIMER_TICKS_PER_SECOND); // wait for a second
+    digitalWrite(LED_BUILTIN, HIGH);            /* Turn the LED on.   */
+    tx_thread_sleep(TX_TIMER_TICKS_PER_SECOND); /* Wait for a second. */
+    digitalWrite(LED_BUILTIN, LOW);             /* Turn the LED off.  */
+    tx_thread_sleep(TX_TIMER_TICKS_PER_SECOND); /* Wait for a second. */
   }
 }
 
@@ -633,21 +636,24 @@ void tx_application_define(void *first_unused_memory)
     4, 4, TX_NO_TIME_SLICE, TX_AUTO_START);
 }
 
-// the setup function runs once when you press reset or power the board
-void setup() {
-  // initialize digital pin LED_BUILTIN as an output.
+/* The setup function runs once when you press reset or power the board. */
+void setup()
+{
+  /* Initialize digital pin LED_BUILTIN as an output. */
   pinMode(LED_BUILTIN, OUTPUT);
 
   /* (2) Add the kernel entry function. */
   tx_kernel_enter();
 } 
 
-// the loop function runs over and over again forever
-void loop() {
+void loop()
+{
   /* (5) Move the LED blink logic into the thread's entry function. */
   /* This will never be called. */
 }
 ```
+
+> NOTE: Arduino Blink formatting and single-line style commenting `//` have been converted to ThreadX formatting and multi-line style `/* */`.
 
 </p>
 </details>
