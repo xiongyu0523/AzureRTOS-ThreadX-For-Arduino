@@ -7,7 +7,6 @@
 * Hackster.io.
 */
 
-
 /* (1) Add the Azure RTOS ThreadX library header file. */
 #include <tx_api.h>
 
