@@ -183,6 +183,7 @@ UINT    status;
         /* Print results */
         if (thread_0_counter % 10 == 0) {
             Serial.print("**** Azure RTOS ThreadX Demo for Arduino ****\r\n");
+            Serial.print("     OS version = "); Serial.print(THREADX_MAJOR_VERSION); Serial.print("."); Serial.print(THREADX_MINOR_VERSION); Serial.print("."); Serial.println(THREADX_PATCH_VERSION);
             Serial.print("     thread 0 events sent:          "); Serial.println(thread_0_counter);
             Serial.print("     thread 1 messages sent:        "); Serial.println(thread_1_counter);
             Serial.print("     thread 2 messages received:    "); Serial.println(thread_2_counter);
