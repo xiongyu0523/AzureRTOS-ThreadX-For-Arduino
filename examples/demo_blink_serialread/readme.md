@@ -1,6 +1,6 @@
 # Azure RTOS ThreadX for Arduino 101: Threads
 
-Microsoft's Azure RTOS ThreadX is open source! We want to show you the basics of ThreadX so you can start using this industrial-grade RTOS in your Arduino personal projects.
+Microsoft's Azure RTOS ThreadX is open source! We want to show you the basics of ThreadX so you can start using this industrial-grade RTOS in your Arduino projects.
 
 **Estimated Time:** 1 hour
 - **Setup:** 5 min
