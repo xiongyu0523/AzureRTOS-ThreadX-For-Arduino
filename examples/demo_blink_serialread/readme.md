@@ -419,6 +419,8 @@ Although this approach still maintains the same single-threaded functionality, i
 ## Part 3: Apply multi-threading to the Blink example via ThreadX
 In this section we will use the single-threaded ThreadX Blink code to create a multi-threaded version that also reads serial input.
 
+**Estimated Time:** 15 min
+
 1. Save the example.
 
     - Navigate to **File > Save As**.
