@@ -28,7 +28,7 @@ Microsoft's Azure RTOS ThreadX is open source! We want to show you the basics of
 
 This tutorial will show you how to use multi-threading with Azure RTOS Threadx for Arduino. You will start with the classic Blink example and convert it.
 
-**_Azure RTOS_**: A Microsoft development suite for embedded IoT applications on microcontrollers (MCUs). [Azure RTOS](http://aka.ms/hackster/azurertos) can be used **independent** of Microsoft's [Azure](https://azure.microsoft.com/resources/cloud-computing-dictionary/what-is-azure) cloud platform.
+**_Azure RTOS_**: A Microsoft development suite for embedded IoT applications on microcontrollers (MCUs). [Azure RTOS](http://aka.ms/hackster/azurertos) **does not** require [Azure](https://azure.microsoft.com/resources/cloud-computing-dictionary/what-is-azure) to run.
 
 **_Azure RTOS ThreadX_**: One component of the Azure RTOS product offering. [ThreadX](https://aka.ms/hackster/ThreadX) is the real time operating system (RTOS) designed to run on MCUs.
 

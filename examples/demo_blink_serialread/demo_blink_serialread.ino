@@ -1,11 +1,18 @@
-/*
- * Copyright (c) Microsoft Corporation. All rights reserved.
- *
- * This is a basic multi-threading demo using the Azure RTOS ThreadX for
- * Arduino library. It combines the classic Blink example with serial input.
- * This sketch is part of the Azure RTOS ThreadX tutorial series published on
- * Hackster.io.
- */
+/**************************************************************************/
+/*                                                                        */
+/*       Copyright (c) Microsoft Corporation. All rights reserved.        */
+/*                                                                        */
+/*       This software is licensed under the Microsoft Software License   */
+/*       Terms for Microsoft Azure RTOS. Full text of the license can be  */
+/*       found in the LICENSE file at https://aka.ms/AzureRTOS_EULA       */
+/*       and in the root directory of this software.                      */
+/*                                                                        */
+/*       This is a basic multi-threading demo using the Azure RTOS        */
+/*       ThreadX for Arduino library. It combines the classic Blink       */
+/*       example with serial input. This sketch is part of the Azure      */
+/*       RTOS ThreadX tutorial series published on Hackster.io.           */
+/*                                                                        */
+/**************************************************************************/
 
 /* (1) Add the Azure RTOS ThreadX library header file. */
 #include <tx_api.h>
@@ -27,10 +34,10 @@ void thread_0_entry(ULONG thread_input)
   while(1)
   {
     /* (5) Move the LED blink logic into the thread's entry function. */
-    digitalWrite(LED_BUILTIN, HIGH);            // turn the LED on
-    tx_thread_sleep(TX_TIMER_TICKS_PER_SECOND); // wait for a second
-    digitalWrite(LED_BUILTIN, LOW);             // turn the LED off
-    tx_thread_sleep(TX_TIMER_TICKS_PER_SECOND); // wait for a second
+    digitalWrite(LED_BUILTIN, HIGH);            /* Turn the LED on.   */
+    tx_thread_sleep(TX_TIMER_TICKS_PER_SECOND); /* Wait for a second. */
+    digitalWrite(LED_BUILTIN, LOW);             /* Turn the LED off.  */
+    tx_thread_sleep(TX_TIMER_TICKS_PER_SECOND); /* Wait for a second. */
   }
 }
 
@@ -70,17 +77,18 @@ void tx_application_define(void *first_unused_memory)
     4, 4, TX_NO_TIME_SLICE, TX_AUTO_START);
 }
 
-// the setup function runs once when you press reset or power the board
-void setup() {
-  // initialize digital pin LED_BUILTIN as an output.
+/* The setup function runs once when you press reset or power the board. */
+void setup()
+{
+  /* Initialize digital pin LED_BUILTIN as an output. */
   pinMode(LED_BUILTIN, OUTPUT);
 
   /* (2) Add the kernel entry function. */
   tx_kernel_enter();
 } 
 
-// the loop function runs over and over again forever
-void loop() {
+void loop()
+{
   /* (5) Move the LED blink logic into the thread's entry function. */
   /* This will never be called. */
 }
