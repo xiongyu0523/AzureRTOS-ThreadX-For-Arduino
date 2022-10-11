@@ -36,7 +36,7 @@
 /*  FUNCTION                                               RELEASE        */
 /*                                                                        */
 /*    _tx_event_flags_get                                 PORTABLE C      */
-/*                                                           6.1          */
+/*                                                           6.1.11       */
 /*  AUTHOR                                                                */
 /*                                                                        */
 /*    William E. Lamie, Microsoft Corporation                             */
@@ -73,9 +73,12 @@
 /*                                                                        */
 /*    DATE              NAME                      DESCRIPTION             */
 /*                                                                        */
-/*  05-19-2020     William E. Lamie         Initial Version 6.0           */
-/*  09-30-2020     Yuxin Zhou               Modified comment(s),          */
+/*  05-19-2020      William E. Lamie        Initial Version 6.0           */
+/*  09-30-2020      Yuxin Zhou              Modified comment(s),          */
 /*                                            resulting in version 6.1    */
+/*  04-25-2022      Scott Larson            Modified comment(s),          */
+/*                                            handle 0 flags case,        */
+/*                                            resulting in version 6.1.11 */
 /*                                                                        */
 /**************************************************************************/
 UINT  _tx_event_flags_get(TX_EVENT_FLAGS_GROUP *group_ptr, ULONG requested_flags,
@@ -130,16 +133,16 @@ UINT            interrupted_set_request;
     /* Check for AND condition. All flags must be present to satisfy request.  */
     if (and_request == TX_AND)
     {
-    
+
         /* AND request is present.  */
-        
+
         /* Calculate the flags present.  */
         flags_satisfied =  (current_flags & requested_flags);
-        
+
         /* Determine if they satisfy the AND request.  */
         if (flags_satisfied != requested_flags)
         {
-        
+
             /* No, not all the requested flags are present. Clear the flags present variable.  */
             flags_satisfied =  ((ULONG) 0);
         }
@@ -150,7 +153,7 @@ UINT            interrupted_set_request;
         /* OR request is present. Simply or the requested flags and the current flags.  */
         flags_satisfied =  (current_flags & requested_flags);
     }
-    
+
     /* Determine if the request is satisfied.  */
     if (flags_satisfied != ((ULONG) 0))
     {
@@ -164,7 +167,7 @@ UINT            interrupted_set_request;
         /* Determine whether or not clearing needs to take place.  */
         if (clear_request == TX_TRUE)
         {
-        
+
              /* Yes, clear the flags that satisfied this request.  */
              group_ptr -> tx_event_flags_group_current =
                                         group_ptr -> tx_event_flags_group_current & (~requested_flags);
@@ -190,16 +193,16 @@ UINT            interrupted_set_request;
     /* Check for AND condition. All flags must be present to satisfy request.  */
     if (and_request == TX_AND)
     {
-    
+
         /* AND request is present.  */
-        
+
         /* Calculate the flags present.  */
         flags_satisfied =  (current_flags & requested_flags);
-        
+
         /* Determine if they satisfy the AND request.  */
         if (flags_satisfied != requested_flags)
         {
-        
+
             /* No, not all the requested flags are present. Clear the flags present variable.  */
             flags_satisfied =  ((ULONG) 0);
         }
@@ -211,7 +214,7 @@ UINT            interrupted_set_request;
            to see if any are present.  */
         flags_satisfied =  (current_flags & requested_flags);
     }
-    
+
     /* Determine if the request is satisfied.  */
     if (flags_satisfied != ((ULONG) 0))
     {
@@ -235,7 +238,7 @@ UINT            interrupted_set_request;
                set request.  */
             if (group_ptr -> tx_event_flags_group_suspended_count != TX_NO_SUSPENSIONS)
             {
-            
+
                 if (group_ptr -> tx_event_flags_group_suspension_list == TX_NULL)
                 {
 
@@ -252,7 +255,7 @@ UINT            interrupted_set_request;
                    event clearing until the set operation is complete.  */
 
                 /* Remember the events to clear.  */
-                group_ptr -> tx_event_flags_group_delayed_clear =  
+                group_ptr -> tx_event_flags_group_delayed_clear =
                                         group_ptr -> tx_event_flags_group_delayed_clear | requested_flags;
             }
             else
@@ -276,11 +279,12 @@ UINT            interrupted_set_request;
         if (wait_option != TX_NO_WAIT)
         {
 
-            /* Determine if the preempt disable flag is non-zero.  */
-            if (_tx_thread_preempt_disable != ((UINT) 0))
+            /* Determine if the preempt disable flag is non-zero OR the requested events is 0.  */
+            if ((_tx_thread_preempt_disable != ((UINT) 0)) || (requested_flags == (UINT) 0))
             {
-            
-                /* Suspension is not allowed if the preempt disable flag is non-zero at this point, return error completion.  */
+
+                /* Suspension is not allowed if the preempt disable flag is non-zero at this point,
+                   or if requested_flags is 0, return error completion.  */
                 status =  TX_NO_EVENTS;
             }
             else
@@ -296,7 +300,7 @@ UINT            interrupted_set_request;
                 /* Increment the number of event flags suspensions on this semaphore.  */
                 group_ptr -> tx_event_flags_group___performance_suspension_count++;
 #endif
-            
+
                 /* Pickup thread pointer.  */
                 TX_THREAD_GET_CURRENT(thread_ptr)
 
@@ -325,7 +329,7 @@ UINT            interrupted_set_request;
 
                 /* Pickup the suspended count.  */
                 suspended_count =  group_ptr -> tx_event_flags_group_suspended_count;
-            
+
                 /* Setup suspension list.  */
                 if (suspended_count == TX_NO_SUSPENSIONS)
                 {
@@ -350,7 +354,7 @@ UINT            interrupted_set_request;
 
                 /* Increment the number of threads suspended.  */
                 group_ptr -> tx_event_flags_group_suspended_count++;
-            
+
                 /* Set the state to suspended.  */
                 thread_ptr -> tx_thread_state =    TX_EVENT_FLAG;
 
@@ -377,10 +381,10 @@ UINT            interrupted_set_request;
 
                 /* Call actual thread suspension routine.  */
                 _tx_thread_system_suspend(thread_ptr);
-    
+
                 /* Disable interrupts.  */
                 TX_DISABLE
-              
+
                 /* Return the completion status.  */
                 status =  thread_ptr -> tx_thread_suspend_status;
 #endif
@@ -388,7 +392,7 @@ UINT            interrupted_set_request;
         }
         else
         {
-            
+
             /* Immediate return, return error completion.  */
             status =  TX_NO_EVENTS;
         }
