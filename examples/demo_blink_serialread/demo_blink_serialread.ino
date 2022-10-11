@@ -1,18 +1,12 @@
-/**************************************************************************/
-/*                                                                        */
-/*       Copyright (c) Microsoft Corporation. All rights reserved.        */
-/*                                                                        */
-/*       This software is licensed under the Microsoft Software License   */
-/*       Terms for Microsoft Azure RTOS. Full text of the license can be  */
-/*       found in the LICENSE file at https://aka.ms/AzureRTOS_EULA       */
-/*       and in the root directory of this software.                      */
-/*                                                                        */
-/*       This is a basic multi-threading demo using the Azure RTOS        */
-/*       ThreadX for Arduino library. It combines the classic Blink       */
-/*       example with serial input. This sketch is part of the Azure      */
-/*       RTOS ThreadX tutorial series published on Hackster.io.           */
-/*                                                                        */
-/**************************************************************************/
+/*
+* Copyright (c) Microsoft Corporation. All rights reserved.
+*
+* This is a basic multi-threading demo using the Azure RTOS ThreadX for
+* Arduino library. It combines the classic Blink example with serial input.
+* This sketch is part of the Azure RTOS ThreadX tutorial series published on
+* Hackster.io.
+*/
+
 
 /* (1) Add the Azure RTOS ThreadX library header file. */
 #include <tx_api.h>
