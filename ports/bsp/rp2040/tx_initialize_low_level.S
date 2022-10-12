@@ -41,6 +41,8 @@
 CORE_HZ           =   F_CPU
 OSTICK_HZ         =   100
 SYSTICK_CYCLES    =   ((CORE_HZ / OSTICK_HZ) - 1)
+SYSTICK_EXCEPTION =   -1
+PENDSV_EXCEPTION  =   -2
     
     .text
     .align 4
@@ -93,6 +95,8 @@ SYSTICK_CYCLES    =   ((CORE_HZ / OSTICK_HZ) - 1)
 @VOID   _tx_initialize_low_level(VOID)
 @{
     .global  _tx_initialize_low_level
+    .global  exception_set_exclusive_handler
+    .global  PendSV_Handler
     .thumb_func
 _tx_initialize_low_level:
 @
@@ -150,6 +154,19 @@ _tx_initialize_low_level:
     ADD     r0, r0, r2                              // 
     STR     r1, [r0]                                // Setup System Handlers 12-15 Priority Registers
                                                     // Note: PnSV must be lowest priority, which is 0xFF
+    PUSH    {r0, lr}                                // Save LR (and r0 just for alignment)
+    LDR     r0, =PENDSV_EXCEPTION
+    LDR     r1, =PendSV_Handler
+    BL      exception_set_exclusive_handler         // Call Pico-SDK API to install PendSV Handler 
+    POP     {r0, r1}                                // Recover LR
+    MOV     lr, r1
+
+    PUSH    {r0, lr}                                // Save LR (and r0 just for alignment)
+    LDR     r0, =SYSTICK_EXCEPTION
+    LDR     r1, =SysTick_Handler
+    BL      exception_set_exclusive_handler         // Call Pico-SDK API to install Systick Handler 
+    POP     {r0, r1}                                // Recover LR
+    MOV     lr, r1
 
     /* Return to caller.  */
     BX      lr
