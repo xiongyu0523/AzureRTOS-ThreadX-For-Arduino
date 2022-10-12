@@ -1,6 +1,6 @@
 # Azure RTOS ThreadX for Arduino 101: Threads
 
-Microsoft's Azure RTOS ThreadX is open source! We want to show you the basics of ThreadX so you can start using this industrial-grade RTOS in your Arduino personal projects.
+Microsoft's Azure RTOS ThreadX is open source! We want to show you the basics of ThreadX so you can start using this industrial-grade RTOS in your Arduino projects.
 
 **Estimated Time:** 1 hour
 - **Setup:** 5 min
@@ -28,7 +28,7 @@ Microsoft's Azure RTOS ThreadX is open source! We want to show you the basics of
 
 This tutorial will show you how to use multi-threading with Azure RTOS Threadx for Arduino. You will start with the classic Blink example and convert it.
 
-**_Azure RTOS_**: A Microsoft development suite for embedded IoT applications on microcontrollers (MCUs). [Azure RTOS](http://aka.ms/hackster/azurertos) can be used **independent** of Microsoft's [Azure](https://azure.microsoft.com/resources/cloud-computing-dictionary/what-is-azure) cloud platform.
+**_Azure RTOS_**: A Microsoft development suite for embedded IoT applications on microcontrollers (MCUs). [Azure RTOS](http://aka.ms/hackster/azurertos) **does not** require [Azure](https://azure.microsoft.com/resources/cloud-computing-dictionary/what-is-azure) to run.
 
 **_Azure RTOS ThreadX_**: One component of the Azure RTOS product offering. [ThreadX](https://aka.ms/hackster/ThreadX) is the real time operating system (RTOS) designed to run on MCUs.
 
@@ -358,10 +358,10 @@ void thread_0_entry(ULONG thread_input)
   while(1)
   {
     /* (5) Move the LED blink logic into the thread's entry function. */
-    digitalWrite(LED_BUILTIN, HIGH);            // turn the LED on
-    tx_thread_sleep(TX_TIMER_TICKS_PER_SECOND); // wait for a second
-    digitalWrite(LED_BUILTIN, LOW);             // turn the LED off
-    tx_thread_sleep(TX_TIMER_TICKS_PER_SECOND); // wait for a second
+    digitalWrite(LED_BUILTIN, HIGH);            /* Turn the LED on.   */
+    tx_thread_sleep(TX_TIMER_TICKS_PER_SECOND); /* Wait for a second. */
+    digitalWrite(LED_BUILTIN, LOW);             /* Turn the LED off.  */
+    tx_thread_sleep(TX_TIMER_TICKS_PER_SECOND); /* Wait for a second. */
   }
 }
 
@@ -379,21 +379,24 @@ void tx_application_define(void *first_unused_memory)
     1, 1, TX_NO_TIME_SLICE, TX_AUTO_START);
 }
 
-// the setup function runs once when you press reset or power the board
-void setup() {
-  // initialize digital pin LED_BUILTIN as an output.
+/* The setup function runs once when you press reset or power the board. */
+void setup()
+{
+  /* Initialize digital pin LED_BUILTIN as an output. */
   pinMode(LED_BUILTIN, OUTPUT);
 
   /* (2) Add the kernel entry function. */
   tx_kernel_enter();
 } 
 
-// the loop function runs over and over again forever
-void loop() {
+void loop()
+{
   /* (5) Move the LED blink logic into the thread's entry function. */
   /* This will never be called. */
 }
 ```
+
+> NOTE: Arduino Blink formatting and single-line style commenting `//` have been converted to ThreadX formatting and multi-line style `/* */`.
 
 </p>
 </details>
@@ -590,10 +593,10 @@ void thread_0_entry(ULONG thread_input)
   while(1)
   {
     /* (5) Move the LED blink logic into the thread's entry function. */
-    digitalWrite(LED_BUILTIN, HIGH);            // turn the LED on
-    tx_thread_sleep(TX_TIMER_TICKS_PER_SECOND); // wait for a second
-    digitalWrite(LED_BUILTIN, LOW);             // turn the LED off
-    tx_thread_sleep(TX_TIMER_TICKS_PER_SECOND); // wait for a second
+    digitalWrite(LED_BUILTIN, HIGH);            /* Turn the LED on.   */
+    tx_thread_sleep(TX_TIMER_TICKS_PER_SECOND); /* Wait for a second. */
+    digitalWrite(LED_BUILTIN, LOW);             /* Turn the LED off.  */
+    tx_thread_sleep(TX_TIMER_TICKS_PER_SECOND); /* Wait for a second. */
   }
 }
 
@@ -633,21 +636,24 @@ void tx_application_define(void *first_unused_memory)
     4, 4, TX_NO_TIME_SLICE, TX_AUTO_START);
 }
 
-// the setup function runs once when you press reset or power the board
-void setup() {
-  // initialize digital pin LED_BUILTIN as an output.
+/* The setup function runs once when you press reset or power the board. */
+void setup()
+{
+  /* Initialize digital pin LED_BUILTIN as an output. */
   pinMode(LED_BUILTIN, OUTPUT);
 
   /* (2) Add the kernel entry function. */
   tx_kernel_enter();
 } 
 
-// the loop function runs over and over again forever
-void loop() {
+void loop()
+{
   /* (5) Move the LED blink logic into the thread's entry function. */
   /* This will never be called. */
 }
 ```
+
+> NOTE: Arduino Blink formatting and single-line style commenting `//` have been converted to ThreadX formatting and multi-line style `/* */`.
 
 </p>
 </details>
