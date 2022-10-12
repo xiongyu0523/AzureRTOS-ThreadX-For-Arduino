@@ -4,6 +4,8 @@
 
 This is a port of Azure RTOS ThreadX to Arduino as a Library. For more information about Azure RTOS, please visit Microsoft Doc and source code on Github.
 
+> 📚 A new [Azure RTOS ThreadX for Arduino 101: Threads](https://www.hackster.io/485734/azure-rtos-threadx-for-arduino-101-threads-963a8d) is avialable on hackster.io.
+
 ## Hardware support
 
 The port and provided demo is verified on following board and Arduino Core. 
@@ -22,9 +24,9 @@ The version of this library is evolving independent to Azure RTOS ThreadX versio
 | Library version | ThreadX version | Note |
 | - | - | - |
 | v1.0.0 | [v6.1.7](https://github.com/azure-rtos/threadx/tree/v6.1.7_rel)  | Initial release |
-| v1.0.1 | [v6.1.12](https://github.com/azure-rtos/threadx/tree/v6.1.7_rel)  | Update ThreadX version |
-| v1.0.2 | [v6.1.12](https://github.com/azure-rtos/threadx/tree/v6.1.7_rel)  | Add Arduino IDE keywords |
-
+| v1.0.1 | [v6.1.12](https://github.com/azure-rtos/threadx/tree/v6.1.12_rel)  | Update ThreadX version |
+| v1.0.2 | [v6.1.12](https://github.com/azure-rtos/threadx/tree/v6.1.12_rel)  | Add Arduino IDE keywords |
+| v1.0.3 | [v6.1.12](https://github.com/azure-rtos/threadx/tree/v6.1.12_rel)  | Add new example for 101 Course |
 ## License
 
 This repository inherit Azure RTOS license from Microsoft. See [LICENSE.txt](./LICENSE.txt) and [LICENSED-HARDWARE.txt](./LICENSED-HARDWARE.txt).
