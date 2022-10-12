@@ -171,7 +171,10 @@ void    thread_0_entry(ULONG thread_input)
 {
 
 UINT    status;
+bool    toggle = true;
 
+    pinMode(LED_BUILTIN, OUTPUT);
+    Serial.begin(115200);
 
     /* This thread simply sits in while-forever-sleep loop.  */
     while(1)
@@ -192,6 +195,14 @@ UINT    status;
             Serial.print("     thread 5 events received:      "); Serial.println(thread_5_counter);
             Serial.print("     thread 6 mutex obtained:       "); Serial.println(thread_6_counter);
             Serial.print("     thread 7 mutex obtained:       "); Serial.println(thread_7_counter);
+
+            if (toggle) {
+                digitalWrite(LED_BUILTIN, LOW);
+                toggle = false;
+            } else {
+                digitalWrite(LED_BUILTIN, HIGH);
+                toggle = true;
+            }
         }
 
         /* Sleep for 10 ticks.  */
@@ -377,9 +388,6 @@ UINT    status;
 
 void setup()
 {
-    Serial.begin(115200);
-    Serial.print("\r\nArduino Environment is Up\r\n");
-
     /* Enter the ThreadX kernel.  */
     tx_kernel_enter();
 }
