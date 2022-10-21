@@ -1,6 +1,6 @@
 # Azure RTOS ThreadX for Arduino 101: Threads
 
-Microsoft's Azure RTOS ThreadX is open source! We want to show you the basics of ThreadX so you can start using this industrial-grade RTOS in your Arduino projects.
+Microsoft's Azure RTOS ThreadX is [available to use](https://aka.ms/hackster/ThreadX/hardware-license)! We want to show you the basics of ThreadX so you can start using this industrial-grade RTOS in your Arduino projects.
 
 **Estimated Time:** 1 hour
 - **Setup:** 5 min
@@ -9,6 +9,9 @@ Microsoft's Azure RTOS ThreadX is open source! We want to show you the basics of
 - **Part 3:** 15 min
 
 **Estimated Cost:** $ of device with [ATSAMD21 or ATSAMD51](https://www.microchip.com/en-us/products/microcontrollers-and-microprocessors/32-bit-mcus/sam-32-bit-mcus/sam-d) chip
+
+
+**_IMPORTANT_:** Please view the [full license disclosure](https://aka.ms/hackster/ThreadX/full-license). ThreadX is available to use only for non-commercial and evaluation purposes, with the exception of full use for the [licensed hardware](https://aka.ms/hackster/ThreadX/hardware-license).
 
 **Table of Contents:**
 - [Azure RTOS ThreadX for Arduino 101: Threads](#azure-rtos-threadx-for-arduino-101-threads)
